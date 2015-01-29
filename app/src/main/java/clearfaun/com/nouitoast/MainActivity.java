@@ -83,16 +83,15 @@ public class MainActivity extends Activity {
 
         while (accuracy > 10) {
 
+            accuracy = (int) location.getAccuracy();
             //do nothing!
             //need to add a case where its not acurate.
         }
 
 
         // Initialize the location fields
-        if (location != null) {
+        onLocationChanged(location);
 
-            onLocationChanged(location);
-        }
 
 
         GpsToAddress task = new GpsToAddress();
