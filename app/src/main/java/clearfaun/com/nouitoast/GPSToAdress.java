@@ -4,6 +4,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -22,13 +23,14 @@ class GpsToAddress extends AsyncTask<Location, Void, String> {
         String result = null;
         int bob = 0;
 
+        Log.i("MyActivity12", " GpsToAddress = " );
 
 
         try
         {
             bob++;
             MainActivity.addresses = MainActivity.geocoder.getFromLocation(MainActivity.latatude, MainActivity.longitude, 1);
-            StringBuilder str = new StringBuilder();
+
 
 
 
@@ -68,7 +70,7 @@ class GpsToAddress extends AsyncTask<Location, Void, String> {
         //editText.setText(address);
         if(String.valueOf(MainActivity.longitude).length() > 8){
 
-
+            Log.i("MyActivity12", " GpsToAddress = onPostExecute" + MainActivity.longitude);
 
             MTAParseStopInfo.TechCrunchTask downloadTaskOne = new MTAParseStopInfo.TechCrunchTask();
             downloadTaskOne.stopRadius = 10;

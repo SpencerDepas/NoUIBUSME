@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
         mContext = getApplicationContext();
 
 
-
+        Log.i("MyActivity12", "onCreate" );
 
 
 
@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         final boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 
-
+        Log.i("MyActivity12", "onResume" );
 
         if (!enabled) {
 
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
             startActivity(intent);
 
         }else {
-
+            Log.i("MyActivity12", "Loading Miguel" );
             toasterShort("Loading Miguel");
             Intent service = new Intent(this, Service.class);
             startService(service);

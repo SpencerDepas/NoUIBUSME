@@ -29,7 +29,7 @@ public class Service extends IntentService {
     protected void onHandleIntent(Intent intent){
         // Handle events on worker thread here
 
-
+        Log.i("MyActivity12", "onHandleIntent " );
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -49,15 +49,15 @@ public class Service extends IntentService {
 
 
         int accuracy = (int) location.getAccuracy();
-        long time= System.currentTimeMillis();
+        long time = System.currentTimeMillis();
         Log.i("MyActivity12", "before while accuracy loop — accuracy = " + accuracy);
-        while (accuracy > 10) {
+        while (accuracy > 10 ) {
 
-            Log.i("MyActivity12", "in while accuracy loop — accuracy = " + accuracy);
+
             accuracy = (int) location.getAccuracy();
+            time = System.currentTimeMillis();
 
-
-            if(time >= time + 5000){
+            if(System.currentTimeMillis() >= time + 5000){
                 break;
             }
 

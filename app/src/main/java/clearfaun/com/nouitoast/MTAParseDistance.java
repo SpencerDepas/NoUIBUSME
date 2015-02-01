@@ -1,6 +1,7 @@
 package clearfaun.com.nouitoast;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,12 +31,11 @@ public class MTAParseDistance {
 
         public static void startTask(){
 
-            if(downloadTask != null){
-                downloadTask.cancel(true);
-            }else{
-                downloadTask = new TechCrunchTask();
-                downloadTask.execute();
-            }
+
+            Log.i("MyActivity12", "PlaceholderFragment: == null " );
+            downloadTask = new TechCrunchTask();
+            downloadTask.execute();
+
         }
 
     }
@@ -46,6 +46,9 @@ public class MTAParseDistance {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            Log.i("MyActivity12", "MTAParseDistance on pre execute " );
+
         }
 
         @Override
@@ -58,8 +61,10 @@ public class MTAParseDistance {
         protected Void doInBackground(Void... params) {
             //do your work here
 
+
             String stopCode = MainActivity.busInfo.getBusCode() + "";
 
+            Log.i("MyActivity12", "pre get call bus distance " + stopCode);
 
             String downloadURL = "http://bustime.mta.info/api/siri/stop-monitoring.xml?key=05a5c2c8-432a-47bd-8f50-ece9382b4b28&MonitoringRef=MTA_" + stopCode + "&MaximumStopVisits=1";
             try {
@@ -73,7 +78,7 @@ public class MTAParseDistance {
                 e.printStackTrace();
             }
 
-
+            Log.i("MyActivity12", "post get call bus distance " + stopCode);
 
             return null;
         }
@@ -89,8 +94,13 @@ public class MTAParseDistance {
 
             //MainActivity.editTextThree.setText(MainActivity.busInfo.getDistance());
 
+            Log.i("MyActivity12", "MTAParseDistance " + MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
 
             MainActivity.toaster( MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
+            MainActivity.busInfo.busRadiusTaskNumber(0);
+            MainActivity.busInfo.busCode(0);
+            MainActivity.busInfo.busName("");
+
             //ToastMe(rootElement.toString());
             // do something with data here-display it or send to mainactivity
 

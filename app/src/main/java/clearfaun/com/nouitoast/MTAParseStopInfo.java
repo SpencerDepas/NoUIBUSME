@@ -1,6 +1,7 @@
 package clearfaun.com.nouitoast;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -32,7 +33,7 @@ public class MTAParseStopInfo {
         protected void onPreExecute() {
 
 
-
+            Log.i("MyActivity12", " MTAParseStopInfo = onPreExecute" + stopRadius + "STP{ RADIUS");
             super.onPreExecute();
 
         }
@@ -77,20 +78,21 @@ public class MTAParseStopInfo {
         }
 
         Element rootElement;
-        boolean returnedStop = false;
+
 
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            Log.i("MyActivity12", "MTAParseStopInfo on post execute " );
 
 
             //editText.setText(rootElement.getTagName());
             //editText.setText(currentItem.getNodeName() + ": " + currentChild.getTextContent());
 
             if( MainActivity.busInfo.getBusRadiusTaskNumber() == 0 && tempBusCode != 0) {
-
+                Log.i("MyActivity12", "if == 0 how many times " );
                 MainActivity.busInfo.busRadiusTaskNumber(stopRadius);
             }
 
@@ -109,6 +111,7 @@ public class MTAParseStopInfo {
 
 
 
+                Log.i("MyActivity12", "MTAParseStopInfo: MTAParseDistance on pre execute " );
                 MTAParseDistance.PlaceholderFragment.startTask();
 
 
