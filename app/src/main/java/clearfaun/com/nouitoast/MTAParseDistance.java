@@ -94,6 +94,8 @@ public class MTAParseDistance {
             //ToastMe(rootElement.toString());
             // do something with data here-display it or send to mainactivity
 
+            //MainActivity.killApp();
+
         }
 
         Node currentItem;

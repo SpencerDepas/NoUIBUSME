@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 
 
 
-
+    public static Activity activity1;
     private static LocationManager locationManager;
     private static String provider;
     static EditText editText;
@@ -83,14 +83,18 @@ public class MainActivity extends Activity {
 
         while (accuracy > 10) {
 
-            accuracy = (int) location.getAccuracy();
+            //accuracy = (int) location.getAccuracy();
             //do nothing!
             //need to add a case where its not acurate.
         }
 
 
         // Initialize the location fields
-        onLocationChanged(location);
+        if (location != null) {
+
+                onLocationChanged(location);
+
+        }
 
 
 
@@ -102,101 +106,10 @@ public class MainActivity extends Activity {
 
 
 
-
-
-
-
     public static BusInfo busInfo = new BusInfo();
     static Geocoder geocoder;
 
-    private static class GpsToAddress extends AsyncTask<Location, Void, String> {
 
-
-
-        @Override
-        protected String doInBackground(Location... params) {
-
-            geocoder = new Geocoder(mContext, Locale.ENGLISH);
-            String result = null;
-            int bob = 0;
-
-
-
-            try
-            {
-                bob++;
-                addresses = geocoder.getFromLocation(latatude, longitude, 1);
-                StringBuilder str = new StringBuilder();
-
-
-
-                if (addresses != null && addresses.size() > 0 ){
-                    bob++;
-
-                    Address returnAddress = addresses.get(0);
-                    returnAddress.toString();
-
-                    String localityString = returnAddress.getAddressLine(0);
-                    String city = returnAddress.getCountryName();
-                    String region_code = returnAddress.getCountryCode();
-                    String zipcode = returnAddress.getPostalCode();
-
-                    return localityString;
-                }
-                else
-                {
-                    return "Cock";
-                }
-            } catch (IOException e) {
-                bob+= 55;
-            }
-
-
-
-            return bob + "";
-        }
-
-
-
-
-        @Override
-        protected void onPostExecute(String address) {
-
-            //toaster(address + "");
-            //editText.setText(address);
-            if(String.valueOf(longitude).length() > 8){
-
-
-
-                MTAParseStopInfo.TechCrunchTask downloadTaskOne = new MTAParseStopInfo.TechCrunchTask();
-                downloadTaskOne.stopRadius = 10;
-                downloadTaskOne.execute();
-
-                MTAParseStopInfo.TechCrunchTask downloadTaskTwo = new MTAParseStopInfo.TechCrunchTask();
-                downloadTaskTwo.stopRadius = 25;
-                downloadTaskTwo.execute();
-
-                MTAParseStopInfo.TechCrunchTask downloadTaskThree = new MTAParseStopInfo.TechCrunchTask();
-                downloadTaskThree.stopRadius = 50;
-                downloadTaskThree.execute();
-
-                MTAParseStopInfo.TechCrunchTask downloadTaskFour = new MTAParseStopInfo.TechCrunchTask();
-                downloadTaskFour.stopRadius = 120;
-                downloadTaskFour.execute();
-
-
-
-
-
-                //this is now in stop info as it does not update on second press here
-                //MTAParseDistance.PlaceholderFragment.startTask();
-                //test comment
-
-            }
-
-        }
-
-    }
 
     public static void onLocationChanged(Location location) {
         latatude =  location.getLatitude();
@@ -221,9 +134,12 @@ public class MainActivity extends Activity {
     static void toaster(String string){
 
 
-        Toast toast = Toast.makeText(mContext, string, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(mContext, string, Toast.LENGTH_LONG);
         toast.show();
     }
+
+
+
 
 
 
