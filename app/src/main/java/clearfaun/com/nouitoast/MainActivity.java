@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,13 +81,19 @@ public class MainActivity extends Activity {
 
 
         int accuracy = (int) location.getAccuracy();
-
+        long time= System.currentTimeMillis();
+        Log.i("MyActivity12", "before while accuracy loop — accuracy = " + accuracy);
         while (accuracy > 10) {
 
-            //accuracy = (int) location.getAccuracy();
+            Log.i("MyActivity12", "in while accuracy loop — accuracy = " + accuracy);
+            accuracy = (int) location.getAccuracy();
+            if(time >= time + 5000){
+                break;
+            }
             //do nothing!
             //need to add a case where its not acurate.
         }
+        Log.i("MyActivity12", "after while accuracy loop — accuracy = " + accuracy);
 
 
         // Initialize the location fields
@@ -100,7 +107,7 @@ public class MainActivity extends Activity {
 
         GpsToAddress task = new GpsToAddress();
         task.execute();
-
+        Log.i("MyActivity12", "after GpsToAddress = " + accuracy);
 
     }
 
@@ -115,7 +122,6 @@ public class MainActivity extends Activity {
         latatude =  location.getLatitude();
         longitude =  location.getLongitude();
         //editText.setText(String.valueOf(latatude) + "\n" + String.valueOf(longitude));
-
 
     }
 
