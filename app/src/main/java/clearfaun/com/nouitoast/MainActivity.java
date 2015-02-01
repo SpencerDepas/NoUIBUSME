@@ -81,8 +81,8 @@ public class MainActivity extends Activity {
             startActivity(intent);
 
         }else {
-            Log.i("MyActivity12", "Loading Miguel" );
-            toasterShort("Loading Miguel");
+            Log.i("MyActivity12", "Loading" );
+            toasterShort("Loading");
             Intent service = new Intent(this, Service.class);
             startService(service);
 
