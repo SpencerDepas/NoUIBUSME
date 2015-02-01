@@ -31,10 +31,6 @@ public class MainActivity extends Activity {
 
 
 
-    public static Activity activity1;
-    private static LocationManager locationManager;
-    private static String provider;
-
     final static public String API_KEY = "05a5c2c8-432a-47bd-8f50-ece9382b4b28";
 
 
@@ -49,29 +45,18 @@ public class MainActivity extends Activity {
     static double latatude;
     static double longitude;
     static List<Address> addresses;
+    LocationManager lService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        LocationManager lService = (LocationManager) getSystemService(LOCATION_SERVICE);
-        final boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
         mContext = getApplicationContext();
 
-        if (!enabled) {
-
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-
-        }else {
-
-            Intent service = new Intent(this, Service.class);
-            startService(service);
 
 
-        }
+
 
 
     }
@@ -83,6 +68,27 @@ public class MainActivity extends Activity {
     public void onResume(){
         super.onResume();
         // put your code here...
+
+        LocationManager lService = (LocationManager) getSystemService(LOCATION_SERVICE);
+        final boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+
+
+
+        if (!enabled) {
+
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+
+        }else {
+
+            toasterShort("Loading Miguel");
+            Intent service = new Intent(this, Service.class);
+            startService(service);
+
+
+        }
+
         finish();
     }
 
@@ -96,7 +102,12 @@ public class MainActivity extends Activity {
         toast.show();
     }
 
+    static void toasterShort(String string){
 
+
+        Toast toast = Toast.makeText(mContext, string, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
 
 }

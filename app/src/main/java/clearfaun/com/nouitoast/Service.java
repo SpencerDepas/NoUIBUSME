@@ -7,9 +7,8 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.util.Log;
-import android.widget.EditText;
+
 
 /**
  * Created by spencer on 2/1/2015.
