@@ -85,8 +85,12 @@ class GpsToAddress extends AsyncTask<Location, Void, String> {
             downloadTaskThree.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskFour = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskFour.stopRadius = 120;
+            downloadTaskFour.stopRadius = 130;
             downloadTaskFour.execute();
+
+            MTAParseStopInfo.TechCrunchTask downloadTaskFive = new MTAParseStopInfo.TechCrunchTask();
+            downloadTaskFive.stopRadius = 200;
+            downloadTaskFive.execute();
 
 
 

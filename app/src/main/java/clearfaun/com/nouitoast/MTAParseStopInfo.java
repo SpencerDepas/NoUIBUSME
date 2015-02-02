@@ -85,7 +85,7 @@ public class MTAParseStopInfo {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            Log.i("MyActivity12", "MTAParseStopInfo on post execute " );
+            Log.i("MyActivity12", "MTAParseStopInfo on post execute " +  MainActivity.busInfo.getBusRadiusTaskNumber() + " temp buscode " + tempBusCode );
 
 
             //editText.setText(rootElement.getTagName());

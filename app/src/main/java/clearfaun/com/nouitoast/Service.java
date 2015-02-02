@@ -55,7 +55,6 @@ public class Service extends IntentService {
 
 
             accuracy = (int) location.getAccuracy();
-            time = System.currentTimeMillis();
 
             if(System.currentTimeMillis() >= time + 5000){
                 break;

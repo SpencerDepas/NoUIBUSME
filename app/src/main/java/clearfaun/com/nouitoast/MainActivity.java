@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
         Log.i("MyActivity12", "onResume" );
 
         if (!enabled) {
-
+            //put gps on
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
 

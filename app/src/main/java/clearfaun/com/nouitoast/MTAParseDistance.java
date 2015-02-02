@@ -64,7 +64,7 @@ public class MTAParseDistance {
 
             String stopCode = MainActivity.busInfo.getBusCode() + "";
 
-            Log.i("MyActivity12", "pre get call bus distance " + stopCode);
+            Log.i("MyActivity12", "doInBackground pre get call bus distance " + stopCode);
 
             String downloadURL = "http://bustime.mta.info/api/siri/stop-monitoring.xml?key=05a5c2c8-432a-47bd-8f50-ece9382b4b28&MonitoringRef=MTA_" + stopCode + "&MaximumStopVisits=1";
             try {
@@ -94,7 +94,7 @@ public class MTAParseDistance {
 
             //MainActivity.editTextThree.setText(MainActivity.busInfo.getDistance());
 
-            Log.i("MyActivity12", "MTAParseDistance " + MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
+            Log.i("MyActivity12", "MTAParseDistance onPostExecute" + MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
 
             MainActivity.toaster( MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
             MainActivity.busInfo.busRadiusTaskNumber(0);
