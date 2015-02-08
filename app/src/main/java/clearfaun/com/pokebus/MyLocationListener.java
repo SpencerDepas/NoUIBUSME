@@ -1,4 +1,4 @@
-package clearfaun.com.nouitoast;
+package clearfaun.com.pokebus;
 
 import android.location.Location;
 import android.location.LocationListener;

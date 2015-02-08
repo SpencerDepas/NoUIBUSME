@@ -1,16 +1,12 @@
-package clearfaun.com.nouitoast;
+package clearfaun.com.pokebus;
 
 import android.app.IntentService;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
 import android.util.Log;
 
 
@@ -43,7 +39,7 @@ public class Service extends IntentService{
 
         if (locationManager != null) {
 
-            Log.i("MyActivity12", "onHandleIntent locationManager != null" );
+            Log.i("MyActivity12", "onHandleIntent locationManager != null");
 
 
             Criteria criteria = new Criteria();
@@ -52,29 +48,32 @@ public class Service extends IntentService{
 
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-            MyLocationListener locationListener = new MyLocationListener();
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
-            Log.i("MyActivity12", "before if getAccuracy <= " + (int) location.getAccuracy());
+            if (location.hasAccuracy()) {
 
+                MyLocationListener locationListener = new MyLocationListener();
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
-            if((int)location.getAccuracy() <= 10 && (int)location.getAccuracy() != 0){
-
-                MainActivity.latatude = location.getLatitude();
-                MainActivity.longitude = location.getLongitude();
+                Log.i("MyActivity12", "before if getAccuracy <= " + (int) location.getAccuracy());
 
 
-                GpsToAddress task = new GpsToAddress();
-                task.execute();
-                Log.i("MyActivity12", "in if GpsToAddress <= " + (int)location.getAccuracy());
+                if ((int) location.getAccuracy() <= 10 && (int) location.getAccuracy() != 0) {
 
-            }else{
-                Log.i("MyActivity12", "entering  untilAccurate" + (int)location.getAccuracy());
-                untilAccurate();
-            }
+                    MainActivity.latatude = location.getLatitude();
+                    MainActivity.longitude = location.getLongitude();
 
 
-            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                    GpsToAddress task = new GpsToAddress();
+                    task.execute();
+                    Log.i("MyActivity12", "in if GpsToAddress <= " + (int) location.getAccuracy());
+
+                } else {
+                    Log.i("MyActivity12", "entering  untilAccurate" + (int) location.getAccuracy());
+                    untilAccurate();
+                }
+
+
+                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
 
             /*accuracy = (int) location.getAccuracy();
@@ -90,14 +89,13 @@ public class Service extends IntentService{
                 }
 
             }*/
-            //Log.i("MyActivity12", "after while accuracy loop — accuracy = " + accuracy);
+                //Log.i("MyActivity12", "after while accuracy loop — accuracy = " + accuracy);
 
+
+            }
+            Log.i("MyActivity12", "!location.hasAccuracy()");
 
         }
-
-
-
-
 
 
 

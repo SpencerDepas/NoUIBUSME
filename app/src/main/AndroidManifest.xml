@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="clearfaun.com.nouitoast" >
+    package="clearfaun.com.pokebus" >
 
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+
+
 
     <application
         android:allowBackup="true"
@@ -13,10 +16,10 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoDisplay"  >
         <service
-            android:name=".Service"
+            android:name="clearfaun.com.pokebus.Service"
             android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name="clearfaun.com.pokebus.MainActivity"
             android:clearTaskOnLaunch="true"
             android:label="@string/app_name" >
             <intent-filter>

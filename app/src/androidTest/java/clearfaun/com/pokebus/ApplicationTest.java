@@ -1,4 +1,4 @@
-package clearfaun.com.nouitoast;
+package clearfaun.com.pokebus;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
