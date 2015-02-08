@@ -55,16 +55,10 @@ public class Service extends IntentService{
             MyLocationListener locationListener = new MyLocationListener();
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
+            Log.i("MyActivity12", "before if getAccuracy <= " + (int) location.getAccuracy());
 
 
-
-
-
-
-            Log.i("MyActivity12", "before if getAccuracy <= " + (int)location.getAccuracy());
-
-
-            if((int)location.getAccuracy() <= 10){
+            if((int)location.getAccuracy() <= 10 && (int)location.getAccuracy() != 0){
 
                 MainActivity.latatude = location.getLatitude();
                 MainActivity.longitude = location.getLongitude();
@@ -72,10 +66,10 @@ public class Service extends IntentService{
 
                 GpsToAddress task = new GpsToAddress();
                 task.execute();
-                Log.i("MyActivity12", "in if GpsToAddress = " + accuracy);
+                Log.i("MyActivity12", "in if GpsToAddress <= " + (int)location.getAccuracy());
 
             }else{
-                Log.i("MyActivity12", "entering  untilAccurate" + accuracy);
+                Log.i("MyActivity12", "entering  untilAccurate" + (int)location.getAccuracy());
                 untilAccurate();
             }
 
@@ -119,7 +113,7 @@ public class Service extends IntentService{
 
 
 
-        if((int)location.getAccuracy() >= 15){
+        if((int)location.getAccuracy() >= 15 && (int)location.getAccuracy() != 0){
             Log.i("MyActivity12", "in  the if " + (int)location.getAccuracy());
 
             long time = System.currentTimeMillis();
@@ -131,17 +125,17 @@ public class Service extends IntentService{
 
             untilAccurate();
         }else{
-
+            Log.i("MyActivity12", "in untilAccurate otw to  GpsToAddress" + (int)location.getAccuracy());
             MainActivity.latatude = location.getLatitude();
             MainActivity.longitude = location.getLongitude();
 
 
             GpsToAddress task = new GpsToAddress();
             task.execute();
-            Log.i("MyActivity12", "in untilAccurate otw to  GpsToAddress" + (int)location.getAccuracy());
+
 
         }
-        Log.i("MyActivity12", "in untilAccurate outside else" + (int)location.getAccuracy());
+
 
     }
 

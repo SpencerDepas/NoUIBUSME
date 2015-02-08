@@ -85,14 +85,15 @@ public class MTAParseStopInfo {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            Log.i("MyActivity12", "MTAParseStopInfo on post execute " +  MainActivity.busInfo.getBusRadiusTaskNumber() + " temp buscode " + tempBusCode );
+            Log.i("MyActivity12", "MTAParseStopInfo on post execute " +  stopRadius + " temp buscode " + tempBusCode
+            + " radius : " + stopRadius);
 
 
             //editText.setText(rootElement.getTagName());
             //editText.setText(currentItem.getNodeName() + ": " + currentChild.getTextContent());
 
             if( MainActivity.busInfo.getBusRadiusTaskNumber() == 0 && tempBusCode != 0) {
-                Log.i("MyActivity12", "if == 0 how many times " );
+                Log.i("MyActivity12", "first setting of buscode "  + stopRadius + " " + tempBusCode);
                 MainActivity.busInfo.busRadiusTaskNumber(stopRadius);
             }
 
@@ -100,7 +101,8 @@ public class MTAParseStopInfo {
 
             if(tempBusCode != 0 && stopRadius <= MainActivity.busInfo.getBusRadiusTaskNumber()) {
 
-
+                Log.i("MyActivity12", "setting of busInfo tempBusCode: " + tempBusCode + "\n" + "tempBusName: " + tempBusName
+                + " stopRadius: " + stopRadius);
                 MainActivity.busInfo.busCode(tempBusCode);
                 MainActivity.busInfo.busName(tempBusName);
                 MainActivity.busInfo.busRadiusTaskNumber(stopRadius);

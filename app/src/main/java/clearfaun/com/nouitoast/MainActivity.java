@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     static double latatude;
     static double longitude;
     static List<Address> addresses;
-    LocationManager lService;
+
 
 
     @Override
@@ -76,9 +76,19 @@ public class MainActivity extends Activity {
         Log.i("MyActivity12", "onResume" );
 
         if (!enabled) {
+            Log.i("MyActivity12", "!enabled" );
+            toaster("Please enable GPS");
+
+            long time = System.currentTimeMillis();
+            while(true){
+                if (System.currentTimeMillis() >= time + 1000) {
+                    break;
+                }
+            }
             //put gps on
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
+
 
         }else {
             Log.i("MyActivity12", "Loading" );
@@ -96,15 +106,11 @@ public class MainActivity extends Activity {
 
 
     static void toaster(String string){
-
-
         Toast toast = Toast.makeText(mContext, string, Toast.LENGTH_LONG);
         toast.show();
     }
 
     static void toasterShort(String string){
-
-
         Toast toast = Toast.makeText(mContext, string, Toast.LENGTH_SHORT);
         toast.show();
     }
