@@ -3,13 +3,18 @@ package clearfaun.com.pokebus;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
 
 import java.util.List;
 
@@ -40,11 +45,22 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         mContext = getApplicationContext();
-
-
         Log.i("MyActivity12", "onCreate" );
 
 
+
+        SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        int firstBoot = sharedpreferences.getInt("first_boot", 0);
+
+        if(firstBoot == 310){
+            editor.putInt("first_boot", 310);
+            editor.apply();
+            Analytics.with(this).track("App open", new Properties());
+        }else{
+            Analytics.with(this).track("App open first time", new Properties());
+        }
 
     }
 
