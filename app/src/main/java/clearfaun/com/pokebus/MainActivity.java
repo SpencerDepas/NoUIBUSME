@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         // put your code here...
 
         LocationManager lService = (LocationManager) getSystemService(LOCATION_SERVICE);
-        final boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 
 
