@@ -38,7 +38,8 @@ public class MainActivity extends Activity {
     static double longitude;
     static List<Address> addresses;
 
-
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,8 @@ public class MainActivity extends Activity {
 
 
 
-        SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        editor = sharedpreferences.edit();
 
         int firstBoot = sharedpreferences.getInt("first_boot", 0);
 
@@ -95,10 +96,22 @@ public class MainActivity extends Activity {
 
 
         }else {
-            Log.i("MyActivity12", "Loading" );
-            toasterShort("Loading");
-            Intent service = new Intent(this, Service.class);
-            startService(service);
+
+            long timeStamp = System.currentTimeMillis();
+            long limitPresses = sharedpreferences.getLong("limit_presses", 0);
+
+
+            if(limitPresses == 0 || limitPresses + 3000 <= timeStamp) {
+
+
+                editor.putLong("limit_presses", timeStamp);
+                editor.apply();
+                Log.i("MyActivity12", "Loading");
+                toasterShort("Loading");
+                Intent service = new Intent(this, Service.class);
+                startService(service);
+
+            }
 
 
         }
