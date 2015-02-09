@@ -19,55 +19,78 @@ ADDED from AndroidManifest.xml:6:5
 		ADDED from AndroidManifest.xml:6:22
 uses-permission#android.permission.INTERNET
 ADDED from AndroidManifest.xml:7:5
+MERGED from com.mixpanel.android:mixpanel-android:4.5.1:17:5
 	android:name
 		ADDED from AndroidManifest.xml:7:22
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from AndroidManifest.xml:8:5
 	android:name
 		ADDED from AndroidManifest.xml:8:22
-application
-ADDED from AndroidManifest.xml:10:5
-MERGED from com.android.support:appcompat-v7:21.0.0:16:5
-MERGED from com.android.support:support-v4:21.0.0:16:5
-	android:label
-		ADDED from AndroidManifest.xml:13:9
-	android:allowBackup
-		ADDED from AndroidManifest.xml:11:9
-	android:icon
-		ADDED from AndroidManifest.xml:12:9
-	android:theme
-		ADDED from AndroidManifest.xml:14:9
-service#clearfaun.com.nouitoast.Service
-ADDED from AndroidManifest.xml:15:9
-	android:exported
-		ADDED from AndroidManifest.xml:17:13
+uses-permission#android.permission.READ_LOGS
+ADDED from AndroidManifest.xml:9:5
 	android:name
-		ADDED from AndroidManifest.xml:16:13
-activity#clearfaun.com.nouitoast.MainActivity
-ADDED from AndroidManifest.xml:18:9
+		ADDED from AndroidManifest.xml:9:22
+application
+ADDED from AndroidManifest.xml:13:5
+MERGED from com.android.support:appcompat-v7:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.segment.analytics.android:all:2.5.3:35:5
+MERGED from com.mixpanel.android:mixpanel-android:4.5.1:44:5
+MERGED from com.google.android.gms:play-services-base:6.5.87:20:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
-		ADDED from AndroidManifest.xml:21:13
-	android:clearTaskOnLaunch
+		ADDED from AndroidManifest.xml:16:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:14:9
+	android:icon
+		ADDED from AndroidManifest.xml:15:9
+	android:theme
+		ADDED from AndroidManifest.xml:17:9
+	tools:ignore
+		ADDED from com.mixpanel.android:mixpanel-android:4.5.1:44:18
+service#clearfaun.com.pokebus.Service
+ADDED from AndroidManifest.xml:18:9
+	android:exported
 		ADDED from AndroidManifest.xml:20:13
 	android:name
 		ADDED from AndroidManifest.xml:19:13
+activity#clearfaun.com.pokebus.MainActivity
+ADDED from AndroidManifest.xml:21:9
+	android:label
+		ADDED from AndroidManifest.xml:24:13
+	android:clearTaskOnLaunch
+		ADDED from AndroidManifest.xml:23:13
+	android:name
+		ADDED from AndroidManifest.xml:22:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:22:13
+ADDED from AndroidManifest.xml:25:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:23:17
+ADDED from AndroidManifest.xml:26:17
 	android:name
-		ADDED from AndroidManifest.xml:23:25
+		ADDED from AndroidManifest.xml:26:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:25:17
+ADDED from AndroidManifest.xml:28:17
 	android:name
-		ADDED from AndroidManifest.xml:25:27
+		ADDED from AndroidManifest.xml:28:27
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
-MERGED from com.android.support:appcompat-v7:21.0.0:15:5
-MERGED from com.android.support:support-v4:21.0.0:15:5
+MERGED from com.android.support:appcompat-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.segment.analytics.android:all:2.5.3:31:5
+MERGED from com.mixpanel.android:mixpanel-android:4.5.1:11:5
+MERGED from com.google.android.gms:play-services-base:6.5.87:18:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 	android:minSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	tools:ignore
+		ADDED from com.mixpanel.android:mixpanel-android:4.5.1:14:9
+meta-data#com.google.android.gms.version
+ADDED from com.google.android.gms:play-services-base:6.5.87:21:9
+	android:name
+		ADDED from com.google.android.gms:play-services-base:6.5.87:22:13
+	android:value
+		ADDED from com.google.android.gms:play-services-base:6.5.87:23:13

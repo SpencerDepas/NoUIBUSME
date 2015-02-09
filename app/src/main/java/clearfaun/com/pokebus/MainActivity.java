@@ -55,10 +55,10 @@ public class MainActivity extends Activity {
         int firstBoot = sharedpreferences.getInt("first_boot", 0);
 
         if(firstBoot == 410){
-            editor.putInt("first_boot", 410);
-            editor.apply();
             Analytics.with(this).track("App open", new Properties());
         }else{
+            editor.putInt("first_boot", 410);
+            editor.apply();
             Analytics.with(this).track("App open first time", new Properties());
         }
 
