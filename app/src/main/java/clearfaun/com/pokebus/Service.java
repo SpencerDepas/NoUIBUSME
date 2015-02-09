@@ -9,6 +9,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.util.Log;
 
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
+
 
 /**
  * Created by spencer on 2/1/2015.
@@ -31,6 +34,9 @@ public class Service extends IntentService{
     @Override
     protected void onHandleIntent(Intent intent){
         // Handle events on worker thread here
+
+
+
 
         Log.i("MyActivity12", "onHandleIntent " );
 
@@ -58,6 +64,9 @@ public class Service extends IntentService{
 
 
                 if ((int) location.getAccuracy() <= 10 && (int) location.getAccuracy() != 0) {
+
+                    Analytics.with(this).track("Accuracy", new Properties()
+                            .putValue("Accuracy", (int) location.getAccuracy() + ""));
 
                     MainActivity.latatude = location.getLatitude();
                     MainActivity.longitude = location.getLongitude();
@@ -102,7 +111,7 @@ public class Service extends IntentService{
 
     }
 
-
+    int trackUntilAccurateLoops = 0;
     public void untilAccurate() {
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         Log.i("MyActivity12", "in  untilAccurate accuracy is " + (int)location.getAccuracy());
@@ -112,7 +121,7 @@ public class Service extends IntentService{
 
 
         if((int)location.getAccuracy() >= 15 && (int)location.getAccuracy() != 0){
-            Log.i("MyActivity12", "in  the if " + (int)location.getAccuracy());
+
 
             long time = System.currentTimeMillis();
             while(true){
@@ -120,9 +129,17 @@ public class Service extends IntentService{
                     break;
                 }
             }
-
+            trackUntilAccurateLoops++;
             untilAccurate();
         }else{
+
+            if(trackUntilAccurateLoops != 0){
+                Analytics.with(this).track("untilAccurate", new Properties()
+                        .putValue("UntilAccurateLoops", trackUntilAccurateLoops + ""));
+            }
+
+            Analytics.with(this).track("untilAccurate", new Properties()
+                    .putValue("Accuracy", (int) location.getAccuracy() + ""));
             Log.i("MyActivity12", "in untilAccurate otw to  GpsToAddress" + (int)location.getAccuracy());
             MainActivity.latatude = location.getLatitude();
             MainActivity.longitude = location.getLongitude();

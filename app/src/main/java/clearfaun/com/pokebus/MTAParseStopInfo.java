@@ -3,6 +3,9 @@ package clearfaun.com.pokebus;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -100,6 +103,9 @@ public class MTAParseStopInfo {
 
 
             if(tempBusCode != 0 && stopRadius <= MainActivity.busInfo.getBusRadiusTaskNumber()) {
+
+                Analytics.with(MainActivity.mContext).track("StopInfo", new Properties()
+                        .putValue("stopRadius", stopRadius));
 
                 Log.i("MyActivity12", "setting of busInfo tempBusCode: " + tempBusCode + "\n" + "tempBusName: " + tempBusName
                 + " stopRadius: " + stopRadius);

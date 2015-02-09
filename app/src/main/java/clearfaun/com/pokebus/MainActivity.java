@@ -54,8 +54,8 @@ public class MainActivity extends Activity {
 
         int firstBoot = sharedpreferences.getInt("first_boot", 0);
 
-        if(firstBoot == 310){
-            editor.putInt("first_boot", 310);
+        if(firstBoot == 410){
+            editor.putInt("first_boot", 410);
             editor.apply();
             Analytics.with(this).track("App open", new Properties());
         }else{
@@ -76,12 +76,13 @@ public class MainActivity extends Activity {
         final boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 
+
         Log.i("MyActivity12", "onResume" );
 
         if (!enabled) {
             Log.i("MyActivity12", "!enabled" );
             toaster("Please enable GPS");
-
+            Analytics.with(this).track("Please enable GPS", new Properties());
             long time = System.currentTimeMillis();
             while(true){
                 if (System.currentTimeMillis() >= time + 1000) {
