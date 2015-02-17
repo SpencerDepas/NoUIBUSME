@@ -109,6 +109,7 @@ public class MTAParseStopInfo {
 
                 Log.i("MyActivity12", "setting of busInfo tempBusCode: " + tempBusCode + "\n" + "tempBusName: " + tempBusName
                 + " stopRadius: " + stopRadius);
+
                 MainActivity.busInfo.busCode(tempBusCode);
                 MainActivity.busInfo.busName(tempBusName);
                 MainActivity.busInfo.busRadiusTaskNumber(stopRadius);

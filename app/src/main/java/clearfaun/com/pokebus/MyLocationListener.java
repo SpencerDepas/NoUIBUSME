@@ -20,20 +20,7 @@ public class MyLocationListener implements LocationListener {
 
         Log.i("MyLocationListener", "IN  onLocationChanged !!!!!!!!!!!!" + accuracy);
 
-        if(accuracy <= 40) {
 
-            MainActivity.latatude = location.getLatitude();
-            MainActivity.longitude = location.getLongitude();
-
-            GpsToAddress task = new GpsToAddress();
-            task.execute();
-            Log.i("MyLocationListener", "MyLocationListener in " + accuracy);
-
-
-        }
-
-
-        // called when the listener is notified with a location update from the GPS
     }
 
 

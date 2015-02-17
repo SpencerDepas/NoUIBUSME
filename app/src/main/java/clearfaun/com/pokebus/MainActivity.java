@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
             long timeStamp = System.currentTimeMillis();
             long limitPresses = sharedpreferences.getLong("limit_presses", 0);
 
-
+            //only press ever 3 seconds
             if(limitPresses == 0 || limitPresses + 3000 <= timeStamp) {
 
 

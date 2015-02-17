@@ -73,11 +73,11 @@ class GpsToAddress extends AsyncTask<Location, Void, String> {
             Log.i("MyActivity12", " GpsToAddress = onPostExecute" + MainActivity.longitude);
 
             MTAParseStopInfo.TechCrunchTask downloadTaskOne = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskOne.stopRadius = 5;
+            downloadTaskOne.stopRadius = 4;
             downloadTaskOne.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskTwo = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskTwo.stopRadius = 10;
+            downloadTaskTwo.stopRadius = 9;
             downloadTaskTwo.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskThree = new MTAParseStopInfo.TechCrunchTask();
@@ -85,31 +85,31 @@ class GpsToAddress extends AsyncTask<Location, Void, String> {
             downloadTaskThree.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskFour = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskFour.stopRadius = 30;
+            downloadTaskFour.stopRadius = 31;
             downloadTaskFour.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskFive = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskFive.stopRadius = 40;
+            downloadTaskFive.stopRadius = 42;
             downloadTaskFive.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskSix = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskSix.stopRadius = 50;
+            downloadTaskSix.stopRadius = 53;
             downloadTaskSix.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskSeven = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskSeven.stopRadius = 70;
+            downloadTaskSeven.stopRadius = 69;
             downloadTaskSeven.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskEight = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskEight.stopRadius = 100;
+            downloadTaskEight.stopRadius = 99;
             downloadTaskEight.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskNine = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskNine.stopRadius = 125;
+            downloadTaskNine.stopRadius = 124;
             downloadTaskNine.execute();
 
             MTAParseStopInfo.TechCrunchTask downloadTaskTen = new MTAParseStopInfo.TechCrunchTask();
-            downloadTaskTen.stopRadius = 130;
+            downloadTaskTen.stopRadius = 129;
             downloadTaskTen.execute();
 
 
