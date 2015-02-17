@@ -8,13 +8,15 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Properties;
 
+import java.util.logging.Handler;
 
 
-    public class Service extends IntentService{
+public class Service extends IntentService{
 
 
         static LocationManager locationManager;
@@ -32,7 +34,6 @@ import com.segment.analytics.Properties;
         @Override
         protected void onHandleIntent(Intent intent){
             // Handle events on worker thread here
-
 
 
 
@@ -89,7 +90,8 @@ import com.segment.analytics.Properties;
                     Log.i("MyActivity12", "!location.hasAccuracy()");
 
                 }else{
-                    MainActivity.toaster("Location not available");
+
+                    new ToastMessageTask().execute("Location not available");
                     Log.i("MyActivity12", "location == null " );
                 }
             }
@@ -134,11 +136,11 @@ import com.segment.analytics.Properties;
 
                     GpsToAddress task = new GpsToAddress();
                     task.execute();
-
+                    trackUntilAccurateLoops = 0;
 
                 }
             }else{
-                MainActivity.toaster("Accurate GPS reading can not be given");
+                new ToastMessageTask().execute("Accurate GPS reading can not be given");
             }
 
         }
