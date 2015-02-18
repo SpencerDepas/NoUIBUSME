@@ -96,7 +96,7 @@ public class MTAParseDistance {
 
             Log.i("MyActivity12", "MTAParseDistance onPostExecute" + MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
 
-            MainActivity.toaster( MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
+            MainActivity.toaster("Buscode: " +  MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
             MainActivity.busInfo.busRadiusTaskNumber(0);
             MainActivity.busInfo.busCode(0);
             MainActivity.busInfo.busName("");

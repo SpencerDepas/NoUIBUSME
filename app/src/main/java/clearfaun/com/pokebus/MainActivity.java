@@ -8,9 +8,11 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.segment.analytics.Analytics;
@@ -25,7 +27,7 @@ public class MainActivity extends Activity {
 
     final static public String API_KEY = "05a5c2c8-432a-47bd-8f50-ece9382b4b28";
 
-
+    public static final int REQUEST_CODE = 1;
     static String testLat = "40.6455520";
     static String testLng = "-73.9829084";
 
@@ -66,7 +68,7 @@ public class MainActivity extends Activity {
     }
 
 
-
+    public static final int GPS_EVENT_STARTED = 1;
 
     @Override
     public void onResume(){
@@ -90,9 +92,35 @@ public class MainActivity extends Activity {
                     break;
                 }
             }
+
             //put gps on
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
+
+            lService.addGpsStatusListener(new android.location.GpsStatus.Listener()
+            {
+                public void onGpsStatusChanged(int event)
+                {
+                    switch(event)
+                    {
+                        case GPS_EVENT_STARTED:
+
+                            //closes gps intent, back to home screen
+                            Intent startMain = new Intent(Intent.ACTION_MAIN);
+                            startMain.addCategory(Intent.CATEGORY_HOME);
+                            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(startMain);
+
+
+                            break;
+
+                    }
+                }
+            });
+
+
+
+
 
 
         }else {
@@ -118,7 +146,6 @@ public class MainActivity extends Activity {
 
         finish();
     }
-
 
 
 
