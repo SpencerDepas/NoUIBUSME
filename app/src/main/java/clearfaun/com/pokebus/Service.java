@@ -102,16 +102,20 @@ public class Service extends IntentService{
 
         int trackUntilAccurateLoops = 0;
         public void untilAccurate() {
+
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Log.i("MyActivity12", "in  untilAccurate accuracy is " + (int)location.getAccuracy());
+            Log.i("MyActivity12", "in  untilAccurate accuracy is " + (int)location.getAccuracy() + "trackUntilAccurateLoops: " + trackUntilAccurateLoops);
             MyLocationListener locationListener = new MyLocationListener();
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
-            if(trackUntilAccurateLoops <= 3) {
+            if(trackUntilAccurateLoops < 3) {
 
                 if ((int) location.getAccuracy() >= 15 && (int) location.getAccuracy() != 0) {
 
-
+                    if (trackUntilAccurateLoops != 0) {
+                        Analytics.with(this).track("untilAccurate", new Properties()
+                                .putValue("UntilAccurateLoops", trackUntilAccurateLoops + ""));
+                    }
                     long time = System.currentTimeMillis();
                     while (true) {
                         if (System.currentTimeMillis() >= time + 3000) {
@@ -122,10 +126,6 @@ public class Service extends IntentService{
                     untilAccurate();
                 } else {
 
-                    if (trackUntilAccurateLoops != 0) {
-                        Analytics.with(this).track("untilAccurate", new Properties()
-                                .putValue("UntilAccurateLoops", trackUntilAccurateLoops + ""));
-                    }
 
                     Analytics.with(this).track("untilAccurate", new Properties()
                             .putValue("Accuracy", (int) location.getAccuracy() + ""));
@@ -133,13 +133,15 @@ public class Service extends IntentService{
                     MainActivity.latatude = location.getLatitude();
                     MainActivity.longitude = location.getLongitude();
 
-
+                    trackUntilAccurateLoops = 0;
                     GpsToAddress task = new GpsToAddress();
                     task.execute();
-                    trackUntilAccurateLoops = 0;
+
 
                 }
+
             }else{
+                Log.i("MyActivity12", "Accurate GPS reading can not be given "  + (int) location.getAccuracy());
                 new ToastMessageTask().execute("Accurate GPS reading can not be given");
             }
 

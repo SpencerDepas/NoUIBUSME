@@ -8,7 +8,7 @@ public class BusInfo {
 
     public int stopCode = 0;
     public String busName = "";
-    public String distance = "";
+    public String distance = "No buses on route";
     public int radiusTaskNumber = 0;
     //constructor
 

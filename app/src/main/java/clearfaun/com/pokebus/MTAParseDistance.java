@@ -89,10 +89,6 @@ public class MTAParseDistance {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            //editText.setText(rootElement.getTagName());
-            //editText.setText(currentItem.getNodeName() + ": " + currentChild.getTextContent());
-
-            //MainActivity.editTextThree.setText(MainActivity.busInfo.getDistance());
 
             Log.i("MyActivity12", "MTAParseDistance onPostExecute" + MainActivity.busInfo.getBusCode() + "\n" + MainActivity.busInfo.busName + ": " + MainActivity.busInfo.getDistance());
 
