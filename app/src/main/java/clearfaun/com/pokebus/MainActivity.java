@@ -1,12 +1,16 @@
 package clearfaun.com.pokebus;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.Settings;
@@ -32,7 +36,7 @@ public class MainActivity extends Activity {
     static String testLng = "-73.9829084";
 
     public static BusInfo busInfo = new BusInfo();
-    static Geocoder geocoder;
+
     static Context mContext;
 
 
@@ -74,21 +78,29 @@ public class MainActivity extends Activity {
     public void onResume(){
         super.onResume();
 
+        Log.i("MyActivity12", "onResume");
+
 
 
         LocationManager lService = (LocationManager) getSystemService(LOCATION_SERVICE);
-        boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean enabledGPS = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean enabledAirplaneMode = isAirplaneModeOn(mContext);
+
+        if(enabledAirplaneMode){
+
+            toaster("Please turn off Airplane mode");
+            Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+            startActivity(intent);
 
 
 
-        Log.i("MyActivity12", "onResume" );
+        }else  if (!enabledGPS) {
 
-        if (!enabled) {
-            Log.i("MyActivity12", "!enabled" );
+            Log.i("MyActivity12", "!enabled");
             toaster("Please enable GPS");
             Analytics.with(this).track("Please enable GPS", new Properties());
             long time = System.currentTimeMillis();
-            while(true){
+            while (true) {
                 if (System.currentTimeMillis() >= time + 1000) {
                     break;
                 }
@@ -98,39 +110,27 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
 
-            lService.addGpsStatusListener(new android.location.GpsStatus.Listener()
-            {
-                public void onGpsStatusChanged(int event)
-                {
-                    switch(event)
-                    {
-                        case GPS_EVENT_STARTED:
+            lService.addGpsStatusListener(new android.location.GpsStatus.Listener() {
+                public void onGpsStatusChanged(int event) {
 
-                            //closes gps intent, back to home screen
-                            Intent startMain = new Intent(Intent.ACTION_MAIN);
-                            startMain.addCategory(Intent.CATEGORY_HOME);
-                            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(startMain);
+                    //closes gps intent, back to home screen
+                    if(event == 1) {
 
-
-                            break;
-
+                        finish();
+                        Log.i("MyActivity12", "!onGpsStatusChanged");
                     }
+
                 }
             });
 
 
-
-
-
-
-        }else {
+        } else {
 
             long timeStamp = System.currentTimeMillis();
             long limitPresses = sharedpreferences.getLong("limit_presses", 0);
 
             //only press ever 3 seconds
-            if(limitPresses == 0 || limitPresses + 3000 <= timeStamp) {
+            if (limitPresses == 0 || limitPresses + 3000 <= timeStamp) {
 
 
                 editor.putLong("limit_presses", timeStamp);
@@ -146,6 +146,7 @@ public class MainActivity extends Activity {
         }
 
         finish();
+
     }
 
 
@@ -161,6 +162,16 @@ public class MainActivity extends Activity {
     }
 
 
-
+    @SuppressWarnings("deprecation")
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static boolean isAirplaneModeOn(Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return Settings.System.getInt(context.getContentResolver(),
+                    Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+        } else {
+            return Settings.Global.getInt(context.getContentResolver(),
+                    Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
+        }
+    }
 
 }

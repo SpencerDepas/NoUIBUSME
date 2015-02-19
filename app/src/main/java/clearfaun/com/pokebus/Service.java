@@ -75,9 +75,8 @@ public class Service extends IntentService{
                             MainActivity.latatude = location.getLatitude();
                             MainActivity.longitude = location.getLongitude();
 
+                            StartGetBusInfo.startMTAParseStopInfo();
 
-                            GpsToAddress task = new GpsToAddress();
-                            task.execute();
                             Log.i("MyService", "in if GpsToAddress <= " + (int) location.getAccuracy());
 
                         } else {
@@ -142,8 +141,7 @@ public class Service extends IntentService{
                     MainActivity.longitude = location.getLongitude();
 
                     trackUntilAccurateLoops = 0;
-                    GpsToAddress task = new GpsToAddress();
-                    task.execute();
+                    StartGetBusInfo.startMTAParseStopInfo();
 
 
                 }
