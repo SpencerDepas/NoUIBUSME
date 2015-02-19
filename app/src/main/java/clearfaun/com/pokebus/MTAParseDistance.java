@@ -97,10 +97,7 @@ public class MTAParseDistance {
             MainActivity.busInfo.busCode(0);
             MainActivity.busInfo.busName("");
 
-            //ToastMe(rootElement.toString());
-            // do something with data here-display it or send to mainactivity
 
-            //MainActivity.killApp();
 
         }
 

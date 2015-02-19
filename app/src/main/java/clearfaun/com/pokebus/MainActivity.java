@@ -73,7 +73,8 @@ public class MainActivity extends Activity {
     @Override
     public void onResume(){
         super.onResume();
-        // put your code here...
+
+
 
         LocationManager lService = (LocationManager) getSystemService(LOCATION_SERVICE);
         boolean enabled = lService.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -158,6 +159,8 @@ public class MainActivity extends Activity {
         Toast toast = Toast.makeText(mContext, string, Toast.LENGTH_SHORT);
         toast.show();
     }
+
+
 
 
 }

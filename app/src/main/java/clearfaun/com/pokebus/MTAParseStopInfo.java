@@ -36,7 +36,7 @@ public class MTAParseStopInfo {
         protected void onPreExecute() {
 
 
-            Log.i("MyActivity12", " MTAParseStopInfo = onPreExecute" + stopRadius + "STP{ RADIUS");
+            Log.i("MyActivity12", " MTAParseStopInfo = onPreExecute STP RADIUS: " + stopRadius);
             super.onPreExecute();
 
         }
@@ -49,7 +49,7 @@ public class MTAParseStopInfo {
 
         @Override
         protected Void doInBackground(Void... params) {
-            //do your work here
+
 
             String stringLatatude = MainActivity.latatude + "";
             String stringlongitude = MainActivity.longitude + "";
@@ -62,10 +62,11 @@ public class MTAParseStopInfo {
             String downloadURL = "http://bustime.mta.info/api/where/stops-for-location.xml?key=" + MainActivity.API_KEY + "&radius=" + stopRadius + "&lat=" +
                     stringLatatude + "&lon=" + stringlongitude;
 
-            /*String downloadURL = "http://bustime.mta.info/api/where/stops-for-location.xml?key=" + MainActivity.API_KEY + "&radius=125&lat=" +
-                    MainActivity.testLat + "&lon=" + MainActivity.testLng;*/
+
 
             try {
+
+                Log.i("MyActivity12", " in try  " );
                 URL url = new URL(downloadURL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
@@ -88,16 +89,18 @@ public class MTAParseStopInfo {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            Log.i("MyActivity12", "MTAParseStopInfo on post execute " +  stopRadius + " temp buscode " + tempBusCode
+            Log.i("MyActivity12", "MTAParseStopInfo on post execute temp buscode " + tempBusCode
             + " radius : " + stopRadius);
 
-
-            //editText.setText(rootElement.getTagName());
-            //editText.setText(currentItem.getNodeName() + ": " + currentChild.getTextContent());
 
             if( MainActivity.busInfo.getBusRadiusTaskNumber() == 0 && tempBusCode != 0) {
                 Log.i("MyActivity12", "first setting of buscode "  + stopRadius + " " + tempBusCode);
                 MainActivity.busInfo.busRadiusTaskNumber(stopRadius);
+            }
+            //129 is the highest radius
+            if(stopRadius == 129 && tempBusCode == 0){
+                Log.i("MyActivity12", "MTAParseStopInfo: No bus stops in range " );
+                new ToastMessageTask().execute("No bus stops in range");
             }
 
 
@@ -128,8 +131,6 @@ public class MTAParseStopInfo {
 
 
 
-            //ToastMe(rootElement.toString());
-            // do something with data here-display it or send to mainactivity
         }
 
         Node currentItem;
@@ -142,6 +143,7 @@ public class MTAParseStopInfo {
 
         public void processXML(InputStream inputStream) throws Exception{
 
+            Log.i("MyActivity12", "in processXML ");
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
@@ -154,6 +156,7 @@ public class MTAParseStopInfo {
             itemChildren = null;
             currentChild = null;
 
+            Log.i("MyActivity12", "itemsList.getLength()  " + itemsList.getLength());
             for(int i = 0; i < itemsList.getLength(); i++){
 
                 currentItem = itemsList.item(i);
@@ -163,6 +166,7 @@ public class MTAParseStopInfo {
                     currentChild = itemChildren.item(j);
                     if(currentChild.getNodeName().equalsIgnoreCase("code")){
                         tempBusCode = Integer.parseInt(currentChild.getTextContent());
+                        Log.i("MyActivity12", "tempBusCode " + tempBusCode);
                         //busInfo.busCode(Integer.parseInt(currentChild.getTextContent()));
                     }
 
@@ -179,7 +183,7 @@ public class MTAParseStopInfo {
                     currentChild = itemChildren.item(j);
                     if(currentChild.getNodeName().equalsIgnoreCase("shortname")){
                         tempBusName = currentChild.getTextContent();
-
+                        Log.i("MyActivity12", "tempBusCode " + tempBusName);
                         //busInfo.busName(currentChild.getTextContent());
                     }
                 }
